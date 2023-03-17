@@ -26,8 +26,8 @@ import org.jetbrains.annotations.NotNull;
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 
-import io.wcm.siteapi.integrationtest.HttpRequestFailedException;
 import io.wcm.siteapi.integrationtest.IntegrationTestContext;
+import io.wcm.siteapi.integrationtest.httpclient.HttpRequestFailedException;
 import io.wcm.siteapi.openapi.validator.ContentValidationException;
 import io.wcm.siteapi.openapi.validator.OpenApiSchemaValidator;
 
@@ -72,7 +72,7 @@ class CrawlerItem {
     OpenApiSchemaValidator validator = context.getValidator(suffix);
     String json;
     try {
-      json = context.fetchBody(url);
+      json = context.getHttpClient().getBody(url);
     }
     catch (HttpRequestFailedException ex) {
       crawler.logFailedVisitUrl(url, appendReferer(ex.getMessage()), "");

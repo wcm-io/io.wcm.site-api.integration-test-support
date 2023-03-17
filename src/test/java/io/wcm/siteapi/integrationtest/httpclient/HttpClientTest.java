@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package io.wcm.siteapi.integrationtest;
+package io.wcm.siteapi.integrationtest.httpclient;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
@@ -29,7 +29,6 @@ import static com.github.tomakehurst.wiremock.client.WireMock.verify;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.net.http.HttpResponse;
 import java.time.Duration;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -38,22 +37,27 @@ import org.junit.jupiter.api.Test;
 import com.github.tomakehurst.wiremock.junit5.WireMockRuntimeInfo;
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 
+import io.wcm.siteapi.integrationtest.IntegrationTestContext;
+import io.wcm.siteapi.integrationtest.IntegrationTestContextBuilder;
+
 @WireMockTest
-class IntegrationTestContextFetchTest {
+class HttpClientTest {
 
   static final String TEST_PATH = "/test1.json";
   static final String TEST_JSON = "{}";
 
-  IntegrationTestContext underTest;
+  IntegrationTestContext context;
+  HttpClient underTest;
   String url;
 
   @BeforeEach
   void setUp(WireMockRuntimeInfo wm) {
-    underTest = new IntegrationTestContextBuilder()
+    context = new IntegrationTestContextBuilder()
         .publishUrl(wm.getHttpBaseUrl())
         .httpConnectTimeout(Duration.ofMillis(2000))
         .httpRequestTimeout(Duration.ofMillis(2000))
         .build();
+    underTest = context.getHttpClient();
     url = wm.getHttpBaseUrl() + TEST_PATH;
   }
 
@@ -62,7 +66,7 @@ class IntegrationTestContextFetchTest {
     stubFor(get(urlPathEqualTo(TEST_PATH)).willReturn(aResponse()
         .withBody(TEST_JSON)));
 
-    HttpResponse<String> response = underTest.fetch(url);
+    HttpResponse<String> response = underTest.get(url);
     assertEquals(200, response.statusCode());
     assertEquals(TEST_JSON, response.body());
 
@@ -76,7 +80,7 @@ class IntegrationTestContextFetchTest {
     stubFor(get(urlPathEqualTo(TEST_PATH)).willReturn(aResponse()
         .withFixedDelay(3000)
         .withStatus(404)));
-    assertThrows(HttpRequestFailedException.class, () -> underTest.fetch(url));
+    assertThrows(HttpRequestFailedException.class, () -> underTest.get(url));
   }
 
   @Test
@@ -84,7 +88,7 @@ class IntegrationTestContextFetchTest {
     stubFor(get(urlPathEqualTo(TEST_PATH)).willReturn(aResponse()
         .withBody(TEST_JSON)));
 
-    assertEquals(TEST_JSON, underTest.fetchBody(url));
+    assertEquals(TEST_JSON, underTest.getBody(url));
   }
 
   @Test
@@ -92,7 +96,7 @@ class IntegrationTestContextFetchTest {
     stubFor(get(urlPathEqualTo(TEST_PATH)).willReturn(aResponse()
         .withStatus(404)));
 
-    assertThrows(HttpRequestFailedException.class, () -> underTest.fetchBody(url));
+    assertThrows(HttpRequestFailedException.class, () -> underTest.getBody(url));
   }
 
 }
