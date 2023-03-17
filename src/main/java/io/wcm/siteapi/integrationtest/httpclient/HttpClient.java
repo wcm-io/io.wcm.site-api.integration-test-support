@@ -33,18 +33,18 @@ import org.jetbrains.annotations.NotNull;
 import io.wcm.siteapi.integrationtest.IntegrationTestContextBuilder;
 
 /**
- * Context for Site API integration tests.
+ * Simple HTTP client wrapper to execute HTTP requests during integration tests.
  */
 public final class HttpClient {
 
-  private final java.net.http.HttpClient httpClient;
+  private final java.net.http.HttpClient delegateHttpClient;
   private final Duration requestTimeout;
 
   /**
    * @param builder Integration test context builder.
    */
   public HttpClient(IntegrationTestContextBuilder builder) {
-    this.httpClient = java.net.http.HttpClient.newBuilder()
+    this.delegateHttpClient = java.net.http.HttpClient.newBuilder()
         // stick with HTTP 1.1 for AEMaaCS CM integration tests
         .version(Version.HTTP_1_1)
         .followRedirects(Redirect.NORMAL)
@@ -66,7 +66,7 @@ public final class HttpClient {
         .timeout(requestTimeout)
         .build();
     try {
-      return new StringHttpResponse(httpClient.send(request, BodyHandlers.ofString()));
+      return new StringHttpResponse(delegateHttpClient.send(request, BodyHandlers.ofString()));
     }
     catch (IOException ex) {
       throw new HttpRequestFailedException("Unable to fetch " + urlWithTimestamp + ": " + ex.getMessage(), ex);
