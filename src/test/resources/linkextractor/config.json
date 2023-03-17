@@ -1,0 +1,53 @@
+{
+  "ConfigSample": {
+    "boolArrayParam": [
+      true,
+      false
+    ],
+    "boolParam": true,
+    "contextPath": {
+      "path": "/content/siteapi-test/en/page-1",
+      "type": "internal",
+      "url": "http://localhost:4502/content/siteapi-test/en/page-1.site.api/content.json"
+    },
+    "damPath": {
+      "path": "http://localhost:4502//content/dam/siteapi-test/prague.jpg",
+      "renditions": [
+        {
+          "fallback": false,
+          "fileExtension": "jpg",
+          "fileName": "prague.jpg",
+          "fileSize": 449603,
+          "height": 878,
+          "mimeType": "image/jpeg",
+          "path": "/content/dam/siteapi-test/prague.jpg/jcr:content/renditions/original",
+          "ratio": 2.1867881548974943,
+          "url": "/content/dam/siteapi-test/prague.jpg/_jcr_content/renditions/original./prague.jpg",
+          "width": 1920
+        }
+      ],
+      "url": "http://localhost:4502//content/dam/siteapi-test/prague.jpg/_jcr_content/renditions/original./prague.jpg"
+    },
+    "intArrayParam": [
+      1,
+      2
+    ],
+    "intDropdownParam": 1,
+    "intParam": 55,
+    "jsonParam": {
+      "age": 42,
+      "hello": "world"
+    },
+    "stringArrayParam": [
+      "value1",
+      "value2"
+    ],
+    "stringDropdownParam": "option2",
+    "stringMultivalueDropdownParam": [
+      "option2",
+      "option4"
+    ],
+    "stringParam": "Example String Value",
+    "stringTextArea": "This is a\nmultiline Text."
+  }
+}

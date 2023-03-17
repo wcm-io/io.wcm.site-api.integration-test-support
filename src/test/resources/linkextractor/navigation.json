@@ -1,0 +1,44 @@
+{
+  "children": [
+    {
+      "children": [
+        {
+          "link": {
+            "path": "/content/siteapi-test/en/page-1/page-1-1",
+            "type": "internal",
+            "url": "http://localhost:4502/content/siteapi-test/en/page-1/page-1-1.site.api/content.json"
+          },
+          "title": "Page 1.1"
+        },
+        {
+          "link": {
+            "path": "/content/siteapi-test/en/page-1/page-1-2",
+            "type": "internal",
+            "url": "http://localhost:4502/content/siteapi-test/en/page-1/page-1-2.site.api/content.json"
+          },
+          "title": "Page 1.2"
+        }
+      ],
+      "link": {
+        "path": "/content/siteapi-test/en/page-1",
+        "type": "internal",
+        "url": "http://localhost:4502/content/siteapi-test/en/page-1.site.api/content.json"
+      },
+      "title": "Page 1"
+    },
+    {
+      "link": {
+        "path": "/content/siteapi-test/en/page-2",
+        "type": "internal",
+        "url": "http://localhost:4502/content/siteapi-test/en/page-2.site.api/content.json"
+      },
+      "title": "Page 2"
+    }
+  ],
+  "link": {
+    "path": "/content/siteapi-test/en",
+    "type": "internal",
+    "url": "http://localhost:4502/content/siteapi-test/en.site.api/content.json"
+  },
+  "title": "HOME"
+}

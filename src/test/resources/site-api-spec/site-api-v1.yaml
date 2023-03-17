@@ -1,0 +1,357 @@
+openapi: "3.0.0"
+
+info:
+  version: "1.0.0-SNAPSHOT"
+  title: "Site API Spec"
+  description: "Delivering content from AEM Sites via REST API."
+
+paths:
+
+  "{contentPath}.site.v1.api/index.json":
+    get:
+      summary: Entry point for Site API
+      description: Provides hypermedia links to the other parts of the API.
+      parameters:
+        - name: contentPath
+          in: path
+          description: Content page path
+          required: true
+          schema:
+            $ref: '#/components/schemas/ContentPath'
+      responses:
+        200:
+          description: Index Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    suffix:
+                      type: string
+                    url:
+                      type: string
+                      example: "{contentPath}.site.api/{suffix}.json"
+                      description: Site API URI
+                      pattern: "^http(|s)://.+"
+                  required: ["suffix", "url"]
+                  additionalProperties: false
+
+  "{contentPath}.site.v1.api/navigation.json":
+    get:
+      summary: Navigation structures.
+      description: Main navigation.
+      parameters:
+        - name: contentPath
+          in: path
+          description: Content page path
+          required: true
+          schema:
+            $ref: '#/components/schemas/ContentPath'
+      responses:
+        200:
+          description: Navigation Response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NavigationItem'
+
+  "{contentPath}.site.v1.api/config.json":
+    get:
+      summary: Configuration parameters.
+      description: Exports a list of context-aware configurations.
+      parameters:
+        - name: contentPath
+          in: path
+          description: Content page path
+          required: true
+          schema:
+            $ref: '#/components/schemas/ContentPath'
+      responses:
+        200:
+          description:
+            Configuration Response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ConfigSample:
+                    $ref: '#/components/schemas/ContextAwareConfig.ConfigSample'
+                additionalProperties: false
+
+  "{contentPath}.site.v1.api/content.json":
+    get:
+      summary: Page content.
+      description: Render content components of page.
+      parameters:
+        - name: contentPath
+          in: path
+          description: Content page path
+          required: true
+          schema:
+            $ref: '#/components/schemas/ContentPath'
+      responses:
+        200:
+          description: Page Content Response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PageContent'
+
+components:
+
+  schemas:
+
+    ContentPath:
+      type: string
+      pattern: (/[^/]+)+
+      example: /content/page1
+      description: AEM content page path
+
+    LocalPath:
+      type: string
+      pattern: (|(/[^/]+)+)
+      example: /page-1
+      description: Local path relative to site root page. "" for site root page.
+
+    NavigationItem:
+      type: object
+      description: Represents a navigation item.
+      properties:
+        title:
+          type: string
+          example: "Navigation Item"
+        link:
+          $ref: '#/components/schemas/Link'
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/NavigationItem'
+      required: ["title", "link"]
+      additionalProperties: false
+
+    Link:
+      type: object
+      description: Reference to internal, external and download links
+      properties:
+        url:
+          type: string
+          example: "{contentPath}.site.v1.api/{suffix}.json"
+          description: Site API URI or external link URL or Asset URL depending on link type
+          pattern: "^http(|s)://.+"
+        type:
+          type: string
+          description: Link type
+          enum:
+            - internal
+            - external
+            - media
+        windowTarget:
+          type: string
+          description: Window target for link
+          enum:
+            - _self
+            - _blank
+        path:
+          $ref: '#/components/schemas/ContentPath'
+        localPath:
+          $ref: '#/components/schemas/LocalPath'
+      required: [ "type","url" ]
+      additionalProperties: false
+
+    Image:
+      type: object
+      description: Reference to image asset
+      properties:
+        path:
+          $ref: '#/components/schemas/ContentPath'
+        url:
+          type: string
+          description: Main rendition URL
+          pattern: "^http(|s)://.+"
+        renditions:
+          type: array
+          description: Image variant renditions with same ratio, different resolutions
+          items:
+            type: object
+            properties:
+              url:
+                type: string
+                description: URL pointing to image rendition
+                pattern: "^http(|s)://.+"
+              width:
+                type: number
+                description: Rendition width (px)
+                example: 500
+              height:
+                type: number
+                description: Rendition height (px)
+                example: 400
+              ratio:
+                type: number
+                description: 'Ratio width : height'
+              path:
+                $ref: '#/components/schemas/ContentPath'
+              mimeType:
+                type: string
+              fileName:
+                type: string
+              fileExtension:
+                type: string
+              fileSize:
+                type: number
+              fallback:
+                type: boolean
+            required: ["url","width","height"]
+            additionalProperties: false
+      required: ["path","url","renditions"]
+      additionalProperties: false
+
+    PageContent:
+      type: object
+      properties:
+        ':type':
+          type: string
+        'title':
+          type: string
+        ':items':
+          type: object
+          properties:
+            root:
+              $ref: '#/components/schemas/Structure.Container'
+        ':itemsOrder':
+          type: array
+          items:
+            type: string
+      required: [":type",":items",":itemsOrder"]
+      additionalProperties: true
+
+    # *** Structure components ***
+    Structure.Container:
+      type: object
+      properties:
+        ':type':
+          type: string
+          enum:
+            - siteapi-test/core/components/container/container
+        ':itemsOrder':
+          type: array
+          items:
+            type: string
+        ':items':
+          type: object
+          additionalProperties:
+            anyOf:
+              - $ref: '#/components/schemas/Structure.Container'
+              - $ref: '#/components/schemas/Component.Title'
+              - $ref: '#/components/schemas/Component.Text'
+              - $ref: '#/components/schemas/Component.Teaser'
+      required: [ ":type",":itemsOrder",":items" ]
+      additionalProperties: true
+
+    # *** Context Aware Configs ***
+
+    ContextAwareConfig.ConfigSample:
+      type: object
+      description: Sample Configuration
+      properties:
+        stringParam:
+          type: string
+          description: String Param
+        intParam:
+          type: number
+          description: Integer Param
+        boolParam:
+          type: boolean
+          description: Boolean Param
+        damPath:
+          $ref: '#/components/schemas/Image'
+        contextPath:
+          $ref: '#/components/schemas/Link'
+        tags:
+          type: array
+          description: Tags
+          items:
+            type: string
+        singleTag:
+          type: string
+          description: Single Tag
+        stringArrayParam:
+          type: array
+          description: String Array Param
+          default: ['value1','value2']
+          items:
+            type: string
+        intArrayParam:
+          type: array
+          description: Integer Array Param
+          default: [1,2]
+          items:
+            type: number
+        boolArrayParam:
+          type: array
+          description: Boolean Array Param
+          default: [true,false]
+          items:
+            type: boolean
+        stringDropdownParam:
+          type: string
+          description: String Dropdown Param
+        intDropdownParam:
+          type: number
+          description: Integer Dropdown Param
+        stringMultivalueDropdownParam:
+          type: array
+          description: String Multivalue Dropdown Param
+          items:
+            type: string
+        stringTextArea:
+          type: string
+          description: String Text Area
+        jsonParam:
+          type: object
+          description: JSON Value
+      additionalProperties: false
+
+    # *** Editorial components ***
+
+    Component.Title:
+      type: object
+      properties:
+        ':type':
+          type: string
+          enum:
+            - siteapi-test/core/components/content/title
+        text:
+          type: string
+          description: Plain text title
+      required: [":type"]
+      additionalProperties: true
+
+    Component.Text:
+      type: object
+      properties:
+        ':type':
+          type: string
+          enum:
+            - siteapi-test/core/components/content/text
+        text:
+          type: string
+          description: Rich text as HTML
+      required: [":type"]
+      additionalProperties: true
+
+    Component.Teaser:
+      type: object
+      properties:
+        ':type':
+          type: string
+          enum:
+            - siteapi-test/core/components/content/teaser
+        title:
+          type: string
+          description: Rich text as HTML
+      required: [":type"]
+      additionalProperties: true
