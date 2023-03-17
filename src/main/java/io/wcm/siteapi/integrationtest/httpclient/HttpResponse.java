@@ -17,27 +17,22 @@
  * limitations under the License.
  * #L%
  */
-package io.wcm.siteapi.integrationtest;
+package io.wcm.siteapi.integrationtest.httpclient;
 
 /**
- * HTTP request failed.
+ * Http client response.
+ * @param <T> Response object type
  */
-public final class HttpRequestFailedException extends RuntimeException {
-  private static final long serialVersionUID = 1L;
+public interface HttpResponse<T> {
 
   /**
-   * @param message Message
+   * @return HTTP status code
    */
-  public HttpRequestFailedException(String message) {
-    super(message);
-  }
+  int statusCode();
 
   /**
-   * @param message Message
-   * @param cause Cause
+   * @return Response body
    */
-  public HttpRequestFailedException(String message, Throwable cause) {
-    super(message, cause);
-  }
+  T body();
 
 }

@@ -51,7 +51,7 @@ public final class IntegrationTestContextBuilder {
    * @param value Publish URL
    * @return this
    */
-  public IntegrationTestContextBuilder publishUrl(@NotNull String value) {
+  public @NotNull IntegrationTestContextBuilder publishUrl(@NotNull String value) {
     // strip "/" from end of publish URL if present
     this.publishUrl = StringUtils.removeEnd(value, "/");
     return this;
@@ -68,23 +68,23 @@ public final class IntegrationTestContextBuilder {
    * @param value Site API selector
    * @return this
    */
-  public IntegrationTestContextBuilder selector(@NotNull String value) {
+  public @NotNull IntegrationTestContextBuilder selector(@NotNull String value) {
     this.selector = value;
     return this;
   }
 
   /**
-   * @return Site API version
+   * @return Site API version or empty string
    */
   public String getApiVersion() {
     return this.apiVersion;
   }
 
   /**
-   * @param value Site API version
+   * @param value Site API version or empty string
    * @return this
    */
-  public IntegrationTestContextBuilder apiVersion(String value) {
+  public @NotNull IntegrationTestContextBuilder apiVersion(@NotNull String value) {
     this.apiVersion = value;
     return this;
   }
@@ -100,7 +100,7 @@ public final class IntegrationTestContextBuilder {
    * @param value Site API extension
    * @return this
    */
-  public IntegrationTestContextBuilder extension(@NotNull String value) {
+  public @NotNull IntegrationTestContextBuilder extension(@NotNull String value) {
     this.extension = value;
     return this;
   }
@@ -108,7 +108,7 @@ public final class IntegrationTestContextBuilder {
   /**
    * @return Open API Spec versions to be used for validation.
    */
-  public OpenApiSpecVersions getSpecVersions() {
+  public @NotNull OpenApiSpecVersions getSpecVersions() {
     return this.specVersions;
   }
 
@@ -116,7 +116,7 @@ public final class IntegrationTestContextBuilder {
    * @param value Open API Spec versions to be used for validation.
    * @return this
    */
-  public IntegrationTestContextBuilder specVersions(OpenApiSpecVersions value) {
+  public @NotNull IntegrationTestContextBuilder specVersions(@NotNull OpenApiSpecVersions value) {
     this.specVersions = value;
     return this;
   }
@@ -124,7 +124,7 @@ public final class IntegrationTestContextBuilder {
   /**
    * @return HTTP connect timeout
    */
-  public Duration getHttpConnectTimeout() {
+  public @NotNull Duration getHttpConnectTimeout() {
     return this.httpConnectTimeout;
   }
 
@@ -132,7 +132,7 @@ public final class IntegrationTestContextBuilder {
    * @param value HTTP connect timeout
    * @return this
    */
-  public IntegrationTestContextBuilder httpConnectTimeout(Duration value) {
+  public @NotNull IntegrationTestContextBuilder httpConnectTimeout(@NotNull Duration value) {
     this.httpConnectTimeout = value;
     return this;
   }
@@ -140,7 +140,7 @@ public final class IntegrationTestContextBuilder {
   /**
    * @return HTTP request timeout
    */
-  public Duration getHttpRequestTimeout() {
+  public @NotNull Duration getHttpRequestTimeout() {
     return this.httpRequestTimeout;
   }
 
@@ -148,7 +148,7 @@ public final class IntegrationTestContextBuilder {
    * @param value HTTP request timeout
    * @return this
    */
-  public IntegrationTestContextBuilder httpRequestTimeout(Duration value) {
+  public @NotNull IntegrationTestContextBuilder httpRequestTimeout(@NotNull Duration value) {
     this.httpRequestTimeout = value;
     return this;
   }
@@ -156,7 +156,7 @@ public final class IntegrationTestContextBuilder {
   /**
    * @return Integration test context
    */
-  public IntegrationTestContext build() {
+  public @NotNull IntegrationTestContext build() {
     if (this.publishUrl == null) {
       throw new IllegalArgumentException("No publish URL given.");
     }
