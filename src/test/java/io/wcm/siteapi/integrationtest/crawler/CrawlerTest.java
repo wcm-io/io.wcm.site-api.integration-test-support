@@ -64,8 +64,8 @@ class CrawlerTest {
     context = new IntegrationTestContextBuilder()
         .publishUrl(wm.getHttpBaseUrl())
         .apiVersion("v1")
-        .httpConnectTimeout(Duration.ofMillis(1000))
-        .httpRequestTimeout(Duration.ofMillis(1000))
+        .httpConnectTimeout(Duration.ofMillis(2000))
+        .httpRequestTimeout(Duration.ofMillis(2000))
         .build();
     underTest = new Crawler(context, List.<LinkExtractor>of(
         new IndexLinks(),
@@ -91,8 +91,8 @@ class CrawlerTest {
   void testCrawl_Successful() {
     underTest.start(context.buildSiteApiUrl(ROOT_PATH, "index"));
 
-    assertEquals(4, underTest.numberOfVisits());
-    assertEquals(0, underTest.numberOfFailedVisits());
+    assertEquals(4, underTest.numberOfVisits(), "number of visits");
+    assertEquals(0, underTest.numberOfFailedVisits(), "number of failed visits");
     assertTrue(underTest.failedVisitUrls().isEmpty());
   }
 
@@ -103,8 +103,8 @@ class CrawlerTest {
 
     underTest.start(context.buildSiteApiUrl(ROOT_PATH, "index"));
 
-    assertEquals(4, underTest.numberOfVisits());
-    assertEquals(1, underTest.numberOfFailedVisits());
+    assertEquals(4, underTest.numberOfVisits(), "number of visits");
+    assertEquals(1, underTest.numberOfFailedVisits(), "number of failed visits");
     assertEquals(List.of(context.getPublishUrl() + CONTENT_PAGE2_PATH),
         List.copyOf(underTest.failedVisitUrls()));
   }
@@ -118,8 +118,8 @@ class CrawlerTest {
 
     underTest.start(context.buildSiteApiUrl(ROOT_PATH, "index"));
 
-    assertEquals(4, underTest.numberOfVisits());
-    assertEquals(1, underTest.numberOfFailedVisits());
+    assertEquals(4, underTest.numberOfVisits(), "number of visits");
+    assertEquals(1, underTest.numberOfFailedVisits(), "number of failed visits");
     assertEquals(List.of(context.getPublishUrl() + "/invalid.json"),
         List.copyOf(underTest.failedVisitUrls()));
   }
@@ -131,8 +131,8 @@ class CrawlerTest {
 
     underTest.start(context.buildSiteApiUrl(ROOT_PATH, "index"));
 
-    assertEquals(3, underTest.numberOfVisits());
-    assertEquals(1, underTest.numberOfFailedVisits());
+    assertEquals(3, underTest.numberOfVisits(), "number of visits");
+    assertEquals(1, underTest.numberOfFailedVisits(), "number of failed visits");
     assertEquals(List.of(context.getPublishUrl() + NAVIGATION_PATH),
         List.copyOf(underTest.failedVisitUrls()));
   }

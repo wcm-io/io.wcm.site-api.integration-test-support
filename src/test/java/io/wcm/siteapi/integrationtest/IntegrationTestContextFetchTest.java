@@ -51,8 +51,8 @@ class IntegrationTestContextFetchTest {
   void setUp(WireMockRuntimeInfo wm) {
     underTest = new IntegrationTestContextBuilder()
         .publishUrl(wm.getHttpBaseUrl())
-        .httpConnectTimeout(Duration.ofMillis(1000))
-        .httpRequestTimeout(Duration.ofMillis(1000))
+        .httpConnectTimeout(Duration.ofMillis(2000))
+        .httpRequestTimeout(Duration.ofMillis(2000))
         .build();
     url = wm.getHttpBaseUrl() + TEST_PATH;
   }
@@ -74,7 +74,7 @@ class IntegrationTestContextFetchTest {
   @Test
   void testFetch_Timeout() {
     stubFor(get(urlPathEqualTo(TEST_PATH)).willReturn(aResponse()
-        .withFixedDelay(1500)
+        .withFixedDelay(3000)
         .withStatus(404)));
     assertThrows(HttpRequestFailedException.class, () -> underTest.fetch(url));
   }
