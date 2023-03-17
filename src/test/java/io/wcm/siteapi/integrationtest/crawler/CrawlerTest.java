@@ -64,8 +64,8 @@ class CrawlerTest {
     context = new IntegrationTestContextBuilder()
         .publishUrl(wm.getHttpBaseUrl())
         .apiVersion("v1")
-        .httpConnectTimeout(Duration.ofMillis(1000))
-        .httpRequestTimeout(Duration.ofMillis(1000))
+        .httpConnectTimeout(Duration.ofMillis(2000))
+        .httpRequestTimeout(Duration.ofMillis(2000))
         .build();
     underTest = new Crawler(context, List.<LinkExtractor>of(
         new IndexLinks(),
