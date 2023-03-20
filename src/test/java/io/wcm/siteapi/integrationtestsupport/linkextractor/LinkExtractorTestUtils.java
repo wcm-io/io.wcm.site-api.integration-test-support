@@ -1,4 +1,4 @@
-package io.wcm.siteapi.integrationtest.linkextractor;
+package io.wcm.siteapi.integrationtestsupport.linkextractor;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

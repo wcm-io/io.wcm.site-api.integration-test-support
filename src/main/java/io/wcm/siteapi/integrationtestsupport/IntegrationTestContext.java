@@ -17,20 +17,22 @@
  * limitations under the License.
  * #L%
  */
-package io.wcm.siteapi.integrationtest;
+package io.wcm.siteapi.integrationtestsupport;
 
 import java.util.Collection;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
-import io.wcm.siteapi.integrationtest.httpclient.HttpClient;
+import io.wcm.siteapi.integrationtestsupport.httpclient.HttpClient;
 import io.wcm.siteapi.openapi.validator.OpenApiSchemaValidator;
 import io.wcm.siteapi.openapi.validator.OpenApiSpec;
 import io.wcm.siteapi.openapi.validator.OpenApiSpecVersions;
 
 /**
- * Context for Site API integration tests.
+ * Context for Site API integration tests. To build an instance use {@link IntegrationTestContextBuilder}.
+ * An instances is always associated with a publish URL to test against, and a specific Site API OAS3 spec version
+ * to validate the JSON content against.
  */
 public final class IntegrationTestContext {
 

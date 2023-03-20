@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package io.wcm.siteapi.integrationtest;
+package io.wcm.siteapi.integrationtestsupport;
 
 import java.time.Duration;
 
@@ -28,7 +28,7 @@ import org.jetbrains.annotations.Nullable;
 import io.wcm.siteapi.openapi.validator.OpenApiSpecVersions;
 
 /**
- * Integration test context builder.
+ * Builder for creating {@link IntegrationTestContext} instances.
  */
 public final class IntegrationTestContextBuilder {
 

@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package io.wcm.siteapi.integrationtest.httpclient;
+package io.wcm.siteapi.integrationtestsupport.httpclient;
 
 class StringHttpResponse implements HttpResponse<String> {
 

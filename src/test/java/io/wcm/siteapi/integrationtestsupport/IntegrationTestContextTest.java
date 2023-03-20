@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package io.wcm.siteapi.integrationtest;
+package io.wcm.siteapi.integrationtestsupport;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

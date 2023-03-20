@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package io.wcm.siteapi.integrationtest.crawler;
+package io.wcm.siteapi.integrationtestsupport.crawler;
 
 import java.util.stream.Stream;
 
@@ -26,8 +26,8 @@ import org.jetbrains.annotations.NotNull;
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 
-import io.wcm.siteapi.integrationtest.IntegrationTestContext;
-import io.wcm.siteapi.integrationtest.httpclient.HttpRequestFailedException;
+import io.wcm.siteapi.integrationtestsupport.IntegrationTestContext;
+import io.wcm.siteapi.integrationtestsupport.httpclient.HttpRequestFailedException;
 import io.wcm.siteapi.openapi.validator.ContentValidationException;
 import io.wcm.siteapi.openapi.validator.OpenApiSchemaValidator;
 

@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package io.wcm.siteapi.integrationtest.httpclient;
+package io.wcm.siteapi.integrationtestsupport.httpclient;
 
 import java.io.IOException;
 import java.net.URI;
@@ -30,10 +30,11 @@ import java.time.Duration;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
-import io.wcm.siteapi.integrationtest.IntegrationTestContextBuilder;
+import io.wcm.siteapi.integrationtestsupport.IntegrationTestContextBuilder;
 
 /**
  * Simple HTTP client wrapper to execute HTTP requests during integration tests.
+ * Uses <code>java.net.http</code> HTTP client internally.
  */
 public final class HttpClient {
 

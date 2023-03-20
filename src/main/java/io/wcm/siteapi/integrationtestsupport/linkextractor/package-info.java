@@ -17,22 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package io.wcm.siteapi.integrationtest.httpclient;
-
 /**
- * Http client response.
- * @param <T> Response object type
+ * Link Extractors to get Site API hyperlinks from JSON content.
  */
-public interface HttpResponse<T> {
-
-  /**
-   * @return HTTP status code
-   */
-  int statusCode();
-
-  /**
-   * @return Response body
-   */
-  T body();
-
-}
+package io.wcm.siteapi.integrationtestsupport.linkextractor;

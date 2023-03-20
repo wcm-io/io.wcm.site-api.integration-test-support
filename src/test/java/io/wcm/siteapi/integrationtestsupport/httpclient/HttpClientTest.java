@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package io.wcm.siteapi.integrationtest.httpclient;
+package io.wcm.siteapi.integrationtestsupport.httpclient;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
@@ -37,8 +37,8 @@ import org.junit.jupiter.api.Test;
 import com.github.tomakehurst.wiremock.junit5.WireMockRuntimeInfo;
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 
-import io.wcm.siteapi.integrationtest.IntegrationTestContext;
-import io.wcm.siteapi.integrationtest.IntegrationTestContextBuilder;
+import io.wcm.siteapi.integrationtestsupport.IntegrationTestContext;
+import io.wcm.siteapi.integrationtestsupport.IntegrationTestContextBuilder;
 
 @WireMockTest
 class HttpClientTest {

@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package io.wcm.siteapi.integrationtest.crawler;
+package io.wcm.siteapi.integrationtestsupport.crawler;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

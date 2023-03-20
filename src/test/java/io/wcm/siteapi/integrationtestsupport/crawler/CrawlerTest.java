@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package io.wcm.siteapi.integrationtest.crawler;
+package io.wcm.siteapi.integrationtestsupport.crawler;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
@@ -40,11 +40,11 @@ import org.junit.jupiter.api.Test;
 import com.github.tomakehurst.wiremock.junit5.WireMockRuntimeInfo;
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 
-import io.wcm.siteapi.integrationtest.IntegrationTestContext;
-import io.wcm.siteapi.integrationtest.IntegrationTestContextBuilder;
-import io.wcm.siteapi.integrationtest.linkextractor.ContentInternalLinks;
-import io.wcm.siteapi.integrationtest.linkextractor.IndexLinks;
-import io.wcm.siteapi.integrationtest.linkextractor.LinkExtractor;
+import io.wcm.siteapi.integrationtestsupport.IntegrationTestContext;
+import io.wcm.siteapi.integrationtestsupport.IntegrationTestContextBuilder;
+import io.wcm.siteapi.integrationtestsupport.linkextractor.ContentInternalLinks;
+import io.wcm.siteapi.integrationtestsupport.linkextractor.IndexLinks;
+import io.wcm.siteapi.integrationtestsupport.linkextractor.LinkExtractor;
 
 @WireMockTest
 class CrawlerTest {
