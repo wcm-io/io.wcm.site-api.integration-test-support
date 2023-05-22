@@ -31,7 +31,7 @@
 
   <groupId>io.wcm</groupId>
   <artifactId>io.wcm.site-api.integration-test-support</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0</version>
   <packaging>jar</packaging>
 
   <name>Site API Integration Test Support</name>
@@ -49,7 +49,7 @@
     <site.url.module.prefix>site-api/integration-test-support</site.url.module.prefix>
 
     <!-- Enable reproducible builds -->
-    <project.build.outputTimestamp>2023-03-01T00:00:00Z</project.build.outputTimestamp>
+    <project.build.outputTimestamp>2023-05-22T09:00:00Z</project.build.outputTimestamp>
   </properties>
 
   <dependencies>
