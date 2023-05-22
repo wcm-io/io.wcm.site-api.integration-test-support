@@ -17,14 +17,18 @@
  * limitations under the License.
  * #L%
  */
-package io.wcm.siteapi.integrationtest.linkextractor;
+package io.wcm.siteapi.integrationtestsupport.linkextractor;
 
 import java.util.stream.Stream;
 
 import com.jayway.jsonpath.DocumentContext;
 
 /**
- * Allows to implement custom link extractors for a set of processor suffixes.
+ * A link extractor is used to fetch all hyperlinks from a JSON content response that point to other
+ * parts of the Site API of the same site to continue crawling with.
+ * <p>
+ * Link extractors should ignore external URLs or URLs pointing to assets.
+ * </p>
  */
 public interface LinkExtractor {
 

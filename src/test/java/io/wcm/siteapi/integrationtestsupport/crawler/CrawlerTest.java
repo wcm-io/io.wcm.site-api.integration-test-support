@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package io.wcm.siteapi.integrationtest.crawler;
+package io.wcm.siteapi.integrationtestsupport.crawler;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
@@ -40,11 +40,11 @@ import org.junit.jupiter.api.Test;
 import com.github.tomakehurst.wiremock.junit5.WireMockRuntimeInfo;
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 
-import io.wcm.siteapi.integrationtest.IntegrationTestContext;
-import io.wcm.siteapi.integrationtest.IntegrationTestContextBuilder;
-import io.wcm.siteapi.integrationtest.linkextractor.ContentInternalLinks;
-import io.wcm.siteapi.integrationtest.linkextractor.IndexLinks;
-import io.wcm.siteapi.integrationtest.linkextractor.LinkExtractor;
+import io.wcm.siteapi.integrationtestsupport.IntegrationTestContext;
+import io.wcm.siteapi.integrationtestsupport.IntegrationTestContextBuilder;
+import io.wcm.siteapi.integrationtestsupport.linkextractor.ContentInternalLinks;
+import io.wcm.siteapi.integrationtestsupport.linkextractor.IndexLinks;
+import io.wcm.siteapi.integrationtestsupport.linkextractor.LinkExtractor;
 
 @WireMockTest
 class CrawlerTest {
@@ -64,8 +64,8 @@ class CrawlerTest {
     context = new IntegrationTestContextBuilder()
         .publishUrl(wm.getHttpBaseUrl())
         .apiVersion("v1")
-        .httpConnectTimeout(Duration.ofMillis(1000))
-        .httpRequestTimeout(Duration.ofMillis(1000))
+        .httpConnectTimeout(Duration.ofMillis(2000))
+        .httpRequestTimeout(Duration.ofMillis(2000))
         .build();
     underTest = new Crawler(context, List.<LinkExtractor>of(
         new IndexLinks(),
@@ -91,8 +91,8 @@ class CrawlerTest {
   void testCrawl_Successful() {
     underTest.start(context.buildSiteApiUrl(ROOT_PATH, "index"));
 
-    assertEquals(4, underTest.numberOfVisits());
-    assertEquals(0, underTest.numberOfFailedVisits());
+    assertEquals(4, underTest.numberOfVisits(), "number of visits");
+    assertEquals(0, underTest.numberOfFailedVisits(), "number of failed visits");
     assertTrue(underTest.failedVisitUrls().isEmpty());
   }
 
@@ -103,8 +103,8 @@ class CrawlerTest {
 
     underTest.start(context.buildSiteApiUrl(ROOT_PATH, "index"));
 
-    assertEquals(4, underTest.numberOfVisits());
-    assertEquals(1, underTest.numberOfFailedVisits());
+    assertEquals(4, underTest.numberOfVisits(), "number of visits");
+    assertEquals(1, underTest.numberOfFailedVisits(), "number of failed visits");
     assertEquals(List.of(context.getPublishUrl() + CONTENT_PAGE2_PATH),
         List.copyOf(underTest.failedVisitUrls()));
   }
@@ -118,8 +118,8 @@ class CrawlerTest {
 
     underTest.start(context.buildSiteApiUrl(ROOT_PATH, "index"));
 
-    assertEquals(4, underTest.numberOfVisits());
-    assertEquals(1, underTest.numberOfFailedVisits());
+    assertEquals(4, underTest.numberOfVisits(), "number of visits");
+    assertEquals(1, underTest.numberOfFailedVisits(), "number of failed visits");
     assertEquals(List.of(context.getPublishUrl() + "/invalid.json"),
         List.copyOf(underTest.failedVisitUrls()));
   }
@@ -131,8 +131,8 @@ class CrawlerTest {
 
     underTest.start(context.buildSiteApiUrl(ROOT_PATH, "index"));
 
-    assertEquals(3, underTest.numberOfVisits());
-    assertEquals(1, underTest.numberOfFailedVisits());
+    assertEquals(3, underTest.numberOfVisits(), "number of visits");
+    assertEquals(1, underTest.numberOfFailedVisits(), "number of failed visits");
     assertEquals(List.of(context.getPublishUrl() + NAVIGATION_PATH),
         List.copyOf(underTest.failedVisitUrls()));
   }

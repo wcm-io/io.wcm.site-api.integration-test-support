@@ -14,7 +14,10 @@ Run Cloud Manager integration tests for Site API.
 
 ### Overview
 
-TBD
+* Support module for AEMaaCS integration tests (Custom Functional Tests in Adobe Cloud Manager) and AEM projects based on [Site API][site-api].
+* Provides a generic crawler that crawls the whole site content represented as JSON serialization with hyperlinks
+* Validates each JSON response against the OAS3 schema using the [Site API Open API Validator][site-api-openapi-validator]
+* Provides a simple set of [LinkExtractor][link-extractor] implementations and the capability to implement custom ones to detect JSON hyperlinks within any project-specific JSON schema
 
 
 ### GitHub Repository
@@ -25,3 +28,6 @@ Sources: https://github.com/wcm-io/io.wcm.site-api.integration-test-support
 [usage]: usage.html
 [apidocs]: apidocs/
 [changelog]: changes-report.html
+[site-api]: https://wcm.io/site-api
+[site-api-openapi-validator]: https://wcm.io/site-api/openapi-validator/
+[link-extractor]: apidocs/io/wcm/siteapi/integrationtestsupport/linkextractor/LinkExtractor.html

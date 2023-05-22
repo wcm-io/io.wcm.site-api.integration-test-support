@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package io.wcm.siteapi.integrationtest.linkextractor;
+package io.wcm.siteapi.integrationtestsupport.linkextractor;
 
 import static com.jayway.jsonpath.Criteria.where;
 import static com.jayway.jsonpath.Filter.filter;
@@ -31,7 +31,12 @@ import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 
 /**
- * Detects content links in any element that have type="internal" and an url property.
+ * Generic extractor that is able to detect any "internal" links produced by
+ * <a href="https://wcm.io/handler/link/">wcm.io Link Handler</a>.
+ * <p>
+ * It used very basic heuristic and looks for any JSON elements with a properties "url" property,
+ * and a "type=internal" property.
+ * </p>
  */
 public final class ContentInternalLinks implements LinkExtractor {
 

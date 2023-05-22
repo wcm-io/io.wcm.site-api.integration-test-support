@@ -1,6 +1,6 @@
-package io.wcm.siteapi.integrationtest.linkextractor;
+package io.wcm.siteapi.integrationtestsupport.linkextractor;
 
-import static io.wcm.siteapi.integrationtest.linkextractor.LinkExtractorTestUtils.assertLinks;
+import static io.wcm.siteapi.integrationtestsupport.linkextractor.LinkExtractorTestUtils.assertLinks;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;

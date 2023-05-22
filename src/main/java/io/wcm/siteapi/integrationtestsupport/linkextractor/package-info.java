@@ -17,27 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package io.wcm.siteapi.integrationtest;
-
 /**
- * HTTP request failed.
+ * Link Extractors to get Site API hyperlinks from JSON content.
  */
-public final class HttpRequestFailedException extends RuntimeException {
-  private static final long serialVersionUID = 1L;
-
-  /**
-   * @param message Message
-   */
-  public HttpRequestFailedException(String message) {
-    super(message);
-  }
-
-  /**
-   * @param message Message
-   * @param cause Cause
-   */
-  public HttpRequestFailedException(String message, Throwable cause) {
-    super(message, cause);
-  }
-
-}
+package io.wcm.siteapi.integrationtestsupport.linkextractor;

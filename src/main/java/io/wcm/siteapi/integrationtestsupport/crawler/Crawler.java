@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package io.wcm.siteapi.integrationtest.crawler;
+package io.wcm.siteapi.integrationtestsupport.crawler;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -30,11 +30,11 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.wcm.siteapi.integrationtest.IntegrationTestContext;
-import io.wcm.siteapi.integrationtest.linkextractor.LinkExtractor;
+import io.wcm.siteapi.integrationtestsupport.IntegrationTestContext;
+import io.wcm.siteapi.integrationtestsupport.linkextractor.LinkExtractor;
 
 /**
- * Site API crawler.
+ * Generic Site API JSON content crawler.
  */
 public final class Crawler {
 
@@ -48,7 +48,7 @@ public final class Crawler {
 
   /**
    * @param context Integration test context
-   * @param linkExtractors Link extractors.
+   * @param linkExtractors Link extractors to use for crawling links detected in JSON content.
    */
   public Crawler(@NotNull IntegrationTestContext context,
       @NotNull List<LinkExtractor> linkExtractors) {
@@ -60,38 +60,11 @@ public final class Crawler {
 
   /**
    * Start API crawling.
-   * @param url API index URL. URL is automatically prefixed with Publish URL if not present.
+   * @param url API index URL to start crawling at.
    */
   public void start(@NotNull String url) {
     CrawlerItem item = new CrawlerItem(this, context, url);
     item.fetch();
-  }
-
-  /**
-   * Is called when a URL should be visited.
-   * @param url Url to visit
-   * @return true if the page was not already visited
-   */
-  public boolean visitUrl(@NotNull String url) {
-    boolean doVisit = visitedUrls.add(url);
-    if (doVisit) {
-      log.info("Visit: {}", url);
-    }
-    else {
-      log.debug("Skip: {}", url);
-    }
-    return doVisit;
-  }
-
-  /**
-   * Log a failed visit.
-   * @param url url
-   * @param message Message
-   * @param fullResponse Full response
-   */
-  public void logFailedVisitUrl(@NotNull String url, @NotNull String message, @NotNull String fullResponse) {
-    log.error("Validation FAILED: {}\n{}\n\n{}\n", url, message, fullResponse);
-    failedUrls.add(url);
   }
 
   /**
@@ -113,6 +86,33 @@ public final class Crawler {
    */
   public @NotNull Collection<String> failedVisitUrls() {
     return Collections.unmodifiableCollection(failedUrls);
+  }
+
+  /**
+   * Is called when a URL should be visited.
+   * @param url Url to visit
+   * @return true if the page was not already visited
+   */
+  boolean visitUrl(@NotNull String url) {
+    boolean doVisit = visitedUrls.add(url);
+    if (doVisit) {
+      log.info("Visit: {}", url);
+    }
+    else {
+      log.debug("Skip: {}", url);
+    }
+    return doVisit;
+  }
+
+  /**
+   * Log a failed visit.
+   * @param url url
+   * @param message Message
+   * @param fullResponse Full response
+   */
+  void logFailedVisitUrl(@NotNull String url, @NotNull String message, @NotNull String fullResponse) {
+    log.error("Validation FAILED: {}\n{}\n\n{}\n", url, message, fullResponse);
+    failedUrls.add(url);
   }
 
   @NotNull
