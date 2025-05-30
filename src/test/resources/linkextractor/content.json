@@ -1,0 +1,71 @@
+{
+  ":items": {
+    "root": {
+      ":items": {
+        "content": {
+          ":items": {
+            "teaser": {
+              ":type": "siteapi-test/core/components/content/teaser",
+              "actions": [],
+              "actionsEnabled": false,
+              "id": "teaser-9036d5413a",
+              "imageLinkHidden": false,
+              "link": {
+                "attributes": {
+                  "data-type": "internal",
+                  "data-path": "/content/siteapi-test/en/page-1"
+                },
+                "url": "http://localhost:4502/content/siteapi-test/en/page-1.site.api/content.json",
+                "valid": true
+              },
+              "title": "Example Teaser",
+              "titleLinkHidden": false,
+              "titleType": "h2",
+              "wcmio:mediaURL": "/content/dam/siteapi-test/nature.jpg/_jcr_content/renditions/original.image_file.1920.600.0,340,1920,940.file/nature.jpg",
+              "wcmio:mediaValid": true
+            },
+            "text": {
+              ":type": "siteapi-test/core/components/content/text",
+              "id": "text-0c5d395e50",
+              "richText": true,
+              "text": "\u003Cp\u003ELorem ipsum \u003Ca href=\"http://localhost:4502/content/siteapi-test/en/page-1.site.api/content.json\" data-path=\"/content/siteapi-test/en/page-1\" data-type=\"internal\"\u003Edolor sit amet\u003C/a\u003E, consectetur \u003Ca href=\"http://wcm.io\" data-type=\"external\" target=\"_blank\"\u003Eadipiscing elit\u003C/a\u003E. Cras arcu mi, commodo ut interdum quis, aliquet sed sapien. In hac habitasse platea dictumst. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer sit amet venenatis velit, sit amet pulvinar dolor. Donec in risus enim. Nullam ultricies dui posuere blandit euismod. Aenean varius porta aliquet. Mauris sed tempor massa, malesuada rhoncus tortor. Vestibulum vitae viverra enim. Duis feugiat mollis tortor, a efficitur massa fringilla ut.\u003C/p\u003E\r\n"
+            },
+            "title": {
+              ":type": "siteapi-test/core/components/content/title",
+              "id": "title-98c009d851",
+              "linkDisabled": false,
+              "text": "Hello siteapi-test",
+              "type": "h1"
+            }
+          },
+          ":itemsOrder": [
+            "teaser",
+            "title",
+            "text"
+          ],
+          ":type": "siteapi-test/core/components/container/container",
+          "id": "container-df156a56b9",
+          "layout": "SIMPLE"
+        }
+      },
+      ":itemsOrder": [
+        "content"
+      ],
+      ":type": "siteapi-test/core/components/container/container",
+      "id": "container-732f4ec7f4",
+      "layout": "SIMPLE"
+    }
+  },
+  ":itemsOrder": [
+    "root"
+  ],
+  ":type": "siteapi-test/core/components/global/page",
+  "brandSlug": "",
+  "cssClassNames": "page basicpage",
+  "designPath": "/libs/settings/wcm/designs/default",
+  "htmlPageItems": [],
+  "id": "page-8fa5f46357",
+  "language": "en",
+  "templateName": "homepage",
+  "title": "en"
+}
