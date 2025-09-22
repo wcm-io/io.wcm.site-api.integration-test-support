@@ -1,6 +1,6 @@
 <img src="https://wcm.io/images/favicon-16@2x.png"/> Site API Integration Test Support
 ======
-[![Build](https://github.com/wcm-io/io.wcm.site-api.integration-test-support/workflows/Build/badge.svg?branch=develop)](https://github.com/wcm-io/io.wcm.site-api.integration-test-support/actions?query=workflow%3ABuild+branch%3Adevelop)
+[![Build](https://github.com/wcm-io/io.wcm.site-api.integration-test-support/actions/workflows/maven-build.yml/badge.svg?branch=develop)](https://github.com/wcm-io/io.wcm.site-api.integration-test-support/actions?query=workflow%3ABuild+branch%3Adevelop)
 [![Maven Central](https://img.shields.io/maven-central/v/io.wcm/io.wcm.site-api.integration-test-support)](https://repo1.maven.org/maven2/io/wcm/io.wcm.site-api.integration-test-support/)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=wcm-io_io.wcm.site-api.integration-test-support&metric=coverage)](https://sonarcloud.io/summary/new_code?id=wcm-io_io.wcm.site-api.integration-test-support)
 
