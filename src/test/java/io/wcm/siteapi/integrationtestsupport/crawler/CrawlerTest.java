@@ -61,29 +61,28 @@ class CrawlerTest {
   @BeforeEach
   void setUp(WireMockRuntimeInfo wm) throws Exception {
     context = new IntegrationTestContextBuilder()
-        .publishUrl(wm.getHttpBaseUrl())
-        .apiVersion("v1")
-        .httpConnectTimeout(Duration.ofMillis(2000))
-        .httpRequestTimeout(Duration.ofMillis(2000))
-        .build();
+      .publishUrl(wm.getHttpBaseUrl())
+      .apiVersion("v1")
+      .httpConnectTimeout(Duration.ofMillis(2000))
+      .httpRequestTimeout(Duration.ofMillis(2000))
+      .build();
     underTest = new Crawler(context, List.<LinkExtractor>of(
         new IndexLinks(),
         new ContentInternalLinks()));
 
     // prepare valid JSON responses for index, navigation and 2 content pages
     stubFor(get(urlPathEqualTo(INDEX_PATH)).willReturn(aResponse()
-        .withBody(buildIndexJson(Map.of(
-            "content", context.getPublishUrl() + CONTENT_ROOT_PATH,
-            "navigation", context.getPublishUrl() + NAVIGATION_PATH
-        )))));
+      .withBody(buildIndexJson(Map.of(
+          "content", context.getPublishUrl() + CONTENT_ROOT_PATH,
+          "navigation", context.getPublishUrl() + NAVIGATION_PATH)))));
     stubFor(get(urlPathEqualTo(NAVIGATION_PATH)).willReturn(aResponse()
-        .withBody(buildNavigationJson(
-            ROOT_PATH, context.getPublishUrl() + CONTENT_ROOT_PATH,
-            PAGE2_PATH, context.getPublishUrl() + CONTENT_PAGE2_PATH))));
+      .withBody(buildNavigationJson(
+          ROOT_PATH, context.getPublishUrl() + CONTENT_ROOT_PATH,
+          PAGE2_PATH, context.getPublishUrl() + CONTENT_PAGE2_PATH))));
     stubFor(get(urlPathEqualTo(CONTENT_ROOT_PATH)).willReturn(aResponse()
-        .withBody(buildContent())));
+      .withBody(buildContent())));
     stubFor(get(urlPathEqualTo(CONTENT_PAGE2_PATH)).willReturn(aResponse()
-        .withBody(buildContent())));
+      .withBody(buildContent())));
   }
 
   @Test
@@ -98,7 +97,7 @@ class CrawlerTest {
   @Test
   void testCrawl_OnePageInvalid() {
     stubFor(get(urlPathEqualTo(CONTENT_PAGE2_PATH)).willReturn(aResponse()
-        .withBody("{}")));
+      .withBody("{}")));
 
     underTest.start(context.buildSiteApiUrl(ROOT_PATH, "index"));
 
@@ -111,9 +110,9 @@ class CrawlerTest {
   @Test
   void testCrawl_InvalidUrl() {
     stubFor(get(urlPathEqualTo(NAVIGATION_PATH)).willReturn(aResponse()
-        .withBody(buildNavigationJson(
-            ROOT_PATH, context.getPublishUrl() + CONTENT_ROOT_PATH,
-            PAGE2_PATH, context.getPublishUrl() + "/invalid.json"))));
+      .withBody(buildNavigationJson(
+          ROOT_PATH, context.getPublishUrl() + CONTENT_ROOT_PATH,
+          PAGE2_PATH, context.getPublishUrl() + "/invalid.json"))));
 
     underTest.start(context.buildSiteApiUrl(ROOT_PATH, "index"));
 
@@ -126,7 +125,7 @@ class CrawlerTest {
   @Test
   void testCrawl_FetchFail() {
     stubFor(get(urlPathEqualTo(NAVIGATION_PATH)).willReturn(aResponse()
-        .withStatus(404)));
+      .withStatus(404)));
 
     underTest.start(context.buildSiteApiUrl(ROOT_PATH, "index"));
 
@@ -140,34 +139,34 @@ class CrawlerTest {
     JsonArrayBuilder array = Json.createArrayBuilder();
     suffixUrls.entrySet().forEach(entry -> {
       array.add(Json.createObjectBuilder()
-          .add("suffix", entry.getKey())
-          .add("url", entry.getValue()));
+        .add("suffix", entry.getKey())
+        .add("url", entry.getValue()));
     });
     return array.build().toString();
   }
 
   private String buildNavigationJson(String rootPath, String rootUrl, String childPath, String childUrl) {
     return Json.createObjectBuilder()
-        .add("title", StringUtils.substringAfterLast(rootPath, "/"))
+      .add("title", StringUtils.substringAfterLast(rootPath, "/"))
+      .add("link", Json.createObjectBuilder()
+        .add("path", rootPath)
+        .add("type", "internal")
+        .add("url", rootUrl))
+      .add("children", Json.createArrayBuilder().add(Json.createObjectBuilder()
+        .add("title", StringUtils.substringAfterLast(childPath, "/"))
         .add("link", Json.createObjectBuilder()
-            .add("path", rootPath)
-            .add("type", "internal")
-            .add("url", rootUrl))
-        .add("children", Json.createArrayBuilder().add(Json.createObjectBuilder()
-            .add("title", StringUtils.substringAfterLast(childPath, "/"))
-            .add("link", Json.createObjectBuilder()
-                .add("path", childPath)
-                .add("type", "internal")
-                .add("url", childUrl))))
-        .build().toString();
+          .add("path", childPath)
+          .add("type", "internal")
+          .add("url", childUrl))))
+      .build().toString();
   }
 
   private String buildContent() {
     return Json.createObjectBuilder()
-        .add(":items", Json.createObjectBuilder())
-        .add(":itemsOrder", Json.createArrayBuilder())
-        .add(":type", "siteapi-test/core/components/global/page")
-        .build().toString();
+      .add(":items", Json.createObjectBuilder())
+      .add(":itemsOrder", Json.createArrayBuilder())
+      .add(":type", "siteapi-test/core/components/global/page")
+      .build().toString();
   }
 
 }

@@ -61,8 +61,8 @@ public final class IntegrationTestContext {
   public String buildSiteApiUrl(@NotNull String path, @NotNull String suffix) {
     StringBuilder result = new StringBuilder();
     result.append(publishUrl)
-        .append(path)
-        .append(".").append(selector);
+      .append(path)
+      .append(".").append(selector);
     if (!StringUtils.isEmpty(apiVersion)) {
       result.append(".").append(apiVersion);
     }

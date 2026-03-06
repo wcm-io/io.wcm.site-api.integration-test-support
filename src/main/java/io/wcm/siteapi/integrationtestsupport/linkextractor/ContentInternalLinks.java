@@ -54,8 +54,8 @@ public final class ContentInternalLinks implements LinkExtractor {
   public Stream<String> getLinks(DocumentContext jsonPathContext) {
     final List<Map<String, String>> contentLinkObjects = jsonPathContext.read(JSON_PATH);
     return contentLinkObjects
-        .stream()
-        .map(item -> item.get("url"));
+      .stream()
+      .map(item -> item.get("url"));
   }
 
 }

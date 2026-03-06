@@ -73,14 +73,14 @@ public final class RichTextInternalLinks implements LinkExtractor {
     // find all rich text components and parse rich text from "text" property
     final List<Map<String, String>> richTextComponents = jsonPathContext.read(jsonPath);
     return richTextComponents.stream()
-        .map(entry -> entry.get("text"))
-        .flatMap(this::extractLinksFromHtmlFragment);
+      .map(entry -> entry.get("text"))
+      .flatMap(this::extractLinksFromHtmlFragment);
   }
 
   private Stream<String> extractLinksFromHtmlFragment(String html) {
     final Document document = Jsoup.parse(html);
     return document.select("a[data-type='internal']").stream()
-        .map(a -> a.attr("href"));
+      .map(a -> a.attr("href"));
   }
 
 }

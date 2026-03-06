@@ -23,6 +23,7 @@ package io.wcm.siteapi.integrationtestsupport.httpclient;
  * HTTP request failed.
  */
 public final class HttpRequestFailedException extends RuntimeException {
+
   private static final long serialVersionUID = 1L;
 
   /**

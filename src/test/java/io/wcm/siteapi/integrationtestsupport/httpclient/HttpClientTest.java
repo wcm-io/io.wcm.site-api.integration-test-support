@@ -53,10 +53,10 @@ class HttpClientTest {
   @BeforeEach
   void setUp(WireMockRuntimeInfo wm) {
     context = new IntegrationTestContextBuilder()
-        .publishUrl(wm.getHttpBaseUrl())
-        .httpConnectTimeout(Duration.ofMillis(2000))
-        .httpRequestTimeout(Duration.ofMillis(2000))
-        .build();
+      .publishUrl(wm.getHttpBaseUrl())
+      .httpConnectTimeout(Duration.ofMillis(2000))
+      .httpRequestTimeout(Duration.ofMillis(2000))
+      .build();
     underTest = context.getHttpClient();
     url = wm.getHttpBaseUrl() + TEST_PATH;
   }
@@ -64,7 +64,7 @@ class HttpClientTest {
   @Test
   void testFetch() {
     stubFor(get(urlPathEqualTo(TEST_PATH)).willReturn(aResponse()
-        .withBody(TEST_JSON)));
+      .withBody(TEST_JSON)));
 
     HttpResponse<String> response = underTest.get(url);
     assertEquals(200, response.statusCode());
@@ -72,21 +72,21 @@ class HttpClientTest {
 
     // ensure timestamp parameter was added
     verify(getRequestedFor(urlPathEqualTo(TEST_PATH))
-        .withQueryParam("timestamp", matching("\\d+")));
+      .withQueryParam("timestamp", matching("\\d+")));
   }
 
   @Test
   void testFetch_Timeout() {
     stubFor(get(urlPathEqualTo(TEST_PATH)).willReturn(aResponse()
-        .withFixedDelay(3000)
-        .withStatus(404)));
+      .withFixedDelay(3000)
+      .withStatus(404)));
     assertThrows(HttpRequestFailedException.class, () -> underTest.get(url));
   }
 
   @Test
   void testFetchBody() {
     stubFor(get(urlPathEqualTo(TEST_PATH)).willReturn(aResponse()
-        .withBody(TEST_JSON)));
+      .withBody(TEST_JSON)));
 
     assertEquals(TEST_JSON, underTest.getBody(url));
   }
@@ -94,7 +94,7 @@ class HttpClientTest {
   @Test
   void testFetchBody_NotFound() {
     stubFor(get(urlPathEqualTo(TEST_PATH)).willReturn(aResponse()
-        .withStatus(404)));
+      .withStatus(404)));
 
     assertThrows(HttpRequestFailedException.class, () -> underTest.getBody(url));
   }

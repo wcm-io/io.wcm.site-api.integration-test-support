@@ -34,11 +34,11 @@ class IntegrationTestContextTest {
   @BeforeEach
   void setUp() {
     underTest = new IntegrationTestContextBuilder()
-        .publishUrl("http://localhost:8080/")
-        .selector("sel1")
-        .apiVersion("v1")
-        .extension("ext1")
-        .build();
+      .publishUrl("http://localhost:8080/")
+      .selector("sel1")
+      .apiVersion("v1")
+      .extension("ext1")
+      .build();
   }
 
   @Test
@@ -68,8 +68,8 @@ class IntegrationTestContextTest {
   @Test
   void testBuildSiteApiUrl_NoVersion_Defaults() {
     underTest = new IntegrationTestContextBuilder()
-        .publishUrl("http://localhost:8080/")
-        .build();
+      .publishUrl("http://localhost:8080/")
+      .build();
     assertEquals("http://localhost:8080/content/page1.site.api/content.json",
         underTest.buildSiteApiUrl("/content/page1", "content"));
   }

@@ -46,11 +46,11 @@ public final class HttpClient {
    */
   public HttpClient(IntegrationTestContextBuilder builder) {
     this.delegateHttpClient = java.net.http.HttpClient.newBuilder()
-        // stick with HTTP 1.1 for AEMaaCS CM integration tests
-        .version(Version.HTTP_1_1)
-        .followRedirects(Redirect.NORMAL)
-        .connectTimeout(builder.getHttpConnectTimeout())
-        .build();
+      // stick with HTTP 1.1 for AEMaaCS CM integration tests
+      .version(Version.HTTP_1_1)
+      .followRedirects(Redirect.NORMAL)
+      .connectTimeout(builder.getHttpConnectTimeout())
+      .build();
     this.requestTimeout = builder.getHttpRequestTimeout();
   }
 
@@ -63,9 +63,9 @@ public final class HttpClient {
   public @NotNull HttpResponse<String> get(@NotNull String url) {
     String urlWithTimestamp = appendTimestamp(url);
     HttpRequest request = HttpRequest.newBuilder()
-        .uri(URI.create(urlWithTimestamp))
-        .timeout(requestTimeout)
-        .build();
+      .uri(URI.create(urlWithTimestamp))
+      .timeout(requestTimeout)
+      .build();
     try {
       return new StringHttpResponse(delegateHttpClient.send(request, BodyHandlers.ofString()));
     }

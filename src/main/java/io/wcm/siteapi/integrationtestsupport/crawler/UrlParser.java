@@ -37,10 +37,10 @@ class UrlParser {
       @NotNull String selector, @NotNull String apiVersion, @NotNull String extension) {
     urlPattern = Pattern.compile(
         "^" + Pattern.quote(publishUrl) + "/.+"
-        + "\\." + Pattern.quote(selector)
-        + (StringUtils.isNotBlank(apiVersion) ? ("\\." + Pattern.quote(apiVersion)) : "")
-        + "\\." + Pattern.quote(extension)
-        + "/([^/]+)(/(.*))?\\.json$");
+            + "\\." + Pattern.quote(selector)
+            + (StringUtils.isNotBlank(apiVersion) ? ("\\." + Pattern.quote(apiVersion)) : "")
+            + "\\." + Pattern.quote(extension)
+            + "/([^/]+)(/(.*))?\\.json$");
   }
 
   String parseSuffix(@NotNull String url) {

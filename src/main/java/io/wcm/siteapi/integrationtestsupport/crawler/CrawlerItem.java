@@ -90,14 +90,14 @@ class CrawlerItem {
 
     // continue crawling with all link URLs found
     getAllLinks(JsonPath.parse(json), suffix)
-        .forEach(followUrl -> new CrawlerItem(crawler, context, followUrl, url).fetch());
+      .forEach(followUrl -> new CrawlerItem(crawler, context, followUrl, url).fetch());
   }
 
   private Stream<String> getAllLinks(@NotNull DocumentContext jsonPathContext, @NotNull String suffix) {
     return crawler.getLinkExtractors().stream()
-        .filter(extractor -> extractor.accept(suffix))
-        .flatMap(extractor -> extractor.getLinks(jsonPathContext))
-        .distinct();
+      .filter(extractor -> extractor.accept(suffix))
+      .flatMap(extractor -> extractor.getLinks(jsonPathContext))
+      .distinct();
   }
 
   private String appendReferer(String message) {
