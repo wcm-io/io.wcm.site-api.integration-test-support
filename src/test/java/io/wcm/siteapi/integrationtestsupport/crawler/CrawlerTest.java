@@ -59,7 +59,7 @@ class CrawlerTest {
   Crawler underTest;
 
   @BeforeEach
-  void setUp(WireMockRuntimeInfo wm) throws Exception {
+  void setUp(WireMockRuntimeInfo wm) {
     context = new IntegrationTestContextBuilder()
       .publishUrl(wm.getHttpBaseUrl())
       .apiVersion("v1")

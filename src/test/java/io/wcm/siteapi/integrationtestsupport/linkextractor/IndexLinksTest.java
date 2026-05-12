@@ -30,7 +30,7 @@ class IndexLinksTest {
   private LinkExtractor underTest;
 
   @BeforeEach
-  void setUp() throws Exception {
+  void setUp() {
     underTest = new IndexLinks();
   }
 

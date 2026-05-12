@@ -30,7 +30,7 @@ class RichTextInternalLinksTest {
   private LinkExtractor underTest;
 
   @BeforeEach
-  void setUp() throws Exception {
+  void setUp() {
     underTest = new RichTextInternalLinks("siteapi-test/core/components/content/text");
   }
 

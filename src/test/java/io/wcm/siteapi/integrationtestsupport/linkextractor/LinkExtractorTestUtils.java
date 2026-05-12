@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.apache.commons.io.IOUtils;
 
@@ -46,7 +45,7 @@ final class LinkExtractorTestUtils {
    */
   public static void assertLinks(LinkExtractor linkExtractor, String classpath, String... expectedUrls) {
     DocumentContext context = getJsonPathContext(classpath);
-    List<String> urls = linkExtractor.getLinks(context).collect(Collectors.toList());
+    List<String> urls = linkExtractor.getLinks(context).toList();
     assertEquals(List.of(expectedUrls), urls);
   }
 
